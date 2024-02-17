@@ -13,7 +13,7 @@ This project, `cloud-shell-scripts`, includes a set of utility scripts designed 
 1. Ensure the latest StackQL Linux build artifact (`stackql_linux_amd64.zip`) is downloaded into the `bin` directory
 2. Execute the `build_package.sh` script to prepare the StackQL package with all necessary scripts:
     ```shell
-    ./build_package.sh
+    sh build_package.sh
     ```
 3. Add the resultant `package/stackql_linux_amd64.zip` to a StackQL release in GitHub
 
