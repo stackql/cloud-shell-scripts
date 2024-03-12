@@ -30,6 +30,7 @@ show_usage() {
 pull_aws_docs() {
     echo "Pulling latest AWS provider..."
     ./stackql exec "REGISTRY PULL aws"
+    ./stackql exec "REGISTRY PULL awscc"
 }
 
 fetch_and_export_aws_creds() {
