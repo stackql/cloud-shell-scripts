@@ -24,8 +24,14 @@ show_usage() {
 }
 
 pull_azure_docs() {
-    echo "Pulling latest Azure provider..."
+    echo "Pulling latest Azure provider (azure)..."
     ./stackql exec "REGISTRY PULL azure"
+    # echo "Pulling latest Azure Extras provider (azure_extras)..."
+    # ./stackql exec "REGISTRY PULL azure_extras"
+    # echo "Pulling latest Azure ISV provider (azure_isv)..."
+    # ./stackql exec "REGISTRY PULL azure_isv"
+    # echo "Pulling latest Azure Stack provider (azure_stack)..."
+    # ./stackql exec "REGISTRY PULL azure_stack"
 }
 
 CMD="shell" # Default to 'shell' command

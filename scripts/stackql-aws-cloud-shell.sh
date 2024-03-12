@@ -28,8 +28,9 @@ show_usage() {
 }
 
 pull_aws_docs() {
-    echo "Pulling latest AWS provider..."
+    echo "Pulling latest AWS provider (aws)..."
     ./stackql exec "REGISTRY PULL aws"
+    echo "Pulling latest AWS Cloud Control provider (awscc)..."
     ./stackql exec "REGISTRY PULL awscc"
 }
 
