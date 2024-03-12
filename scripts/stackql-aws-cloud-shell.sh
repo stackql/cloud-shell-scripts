@@ -46,9 +46,17 @@ fetch_and_export_aws_creds() {
         exit 1
     fi
     
-    export AWS_ACCESS_KEY_ID=$(echo "$creds" | jq -r '.AccessKeyId')
-    export AWS_SECRET_ACCESS_KEY=$(echo "$creds" | jq -r '.SecretAccessKey')
-    export AWS_SESSION_TOKEN=$(echo "$creds" | jq -r '.Token')
+    if ! jq -e . >/dev/null 2>&1 <<< "$creds"; then
+        echo "Failed to retrieve AWS credentials, try refreshing your browser."
+        exit 1
+    else
+        user_identity=$(aws sts get-caller-identity)
+        user_name=$(echo "$user_identity" | jq -r '.Arn' | awk -F'/' '{print $NF}')
+        echo "Launching StackQL as: $user_name..."
+        export AWS_ACCESS_KEY_ID=$(echo "$creds" | jq -r '.AccessKeyId')
+        export AWS_SECRET_ACCESS_KEY=$(echo "$creds" | jq -r '.SecretAccessKey')
+        export AWS_SESSION_TOKEN=$(echo "$creds" | jq -r '.Token')
+    fi
     
     if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ] || [ -z "$AWS_SESSION_TOKEN" ]; then
         echo "Error: Failed to set AWS credentials."
