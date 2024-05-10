@@ -30,8 +30,6 @@ show_usage() {
 pull_aws_docs() {
     echo "Pulling latest AWS provider (aws)..."
     ./stackql exec "REGISTRY PULL aws"
-    echo "Pulling latest AWS Cloud Control provider (awscc)..."
-    ./stackql exec "REGISTRY PULL awscc"
 }
 
 fetch_and_export_aws_creds() {
@@ -100,7 +98,7 @@ while [ $# -gt 0 ]; do
             ROLE_ARN="$1" # Capture the role ARN
             shift # Move past the value
             ;;
-        shell|exec)
+        shell|exec|ext)
             CMD="$1"
             shift # Move past the command
             ;;
@@ -134,6 +132,10 @@ elif [ "$CMD" = "exec" ]; then
     pull_aws_docs
     echo "Executing StackQL query..."
     eval "./stackql exec $FLAGS"
+elif [ "$CMD" = "ext" ]; then
+    pull_aws_docs
+    echo "Creds exported for use with external tools (like pystackql)..."
+    echo $AWS_ACCESS_KEY_ID
 else
     show_usage
     echo
