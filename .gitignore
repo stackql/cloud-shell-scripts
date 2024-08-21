@@ -1,3 +1,7 @@
 stackql
 stackql-zip
+stackql-arm64
 .stackql/
+stackql-aws-cloud-shell.sh
+stackql-azure-cloud-shell.sh
+stackql-google-cloud-shell.sh
